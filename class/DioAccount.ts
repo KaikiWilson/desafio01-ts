@@ -1,5 +1,5 @@
 export abstract class DioAccount {
-  private name: string
+  private readonly name: string
   private readonly accountNumber: number
   balance: number = 0
   private status: boolean = true
@@ -9,19 +9,18 @@ export abstract class DioAccount {
     this.accountNumber = accountNumber
   }
 
-  setName = (name: string): void => {
-    this.name = name
-    console.log('Nome alterado com sucesso!')
+  setName = (): void => {
+    console.log('Não é possivel alterar o nome de usuário!')
   }
 
   getName = (): string => {
     return this.name
   }
 
-  deposit = (value: number = 30): void => {
+  deposit = (value: number = 0): void => {
     if(this.validateStatus()){
       this.balance += value
-      console.log('Voce depositou')
+      console.log('Voce depositou!')
     }
   }
 

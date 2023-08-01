@@ -1,31 +1,25 @@
 import { DioAccount } from "./DioAccount"
 
 export class OtherAccount extends DioAccount {
-    statusBonus: boolean = true
-
+    
     constructor(name: string, accountNumber: number){
         super(name, accountNumber)
     }
 
-    depositBonus = (value: number): void => {
+    deposit = (value: number = 0): void => {
         if(this.validateStatus()){
-            this.balance += value
-            if (this.validateStatusBonus()) {
-                this.balance += 10
-            }
-            console.log('Voce depositou')
-        }
-    }
+          this.balance += value
 
-    public validateStatusBonus = (): boolean => {
-        if (this.statusBonus) {
-          return this.statusBonus
+          if(OtherAccount && (value == 0 || value == null)) {
+                this.balance += 10
+                console.log ('Você depositou nada na conta, porém por ser cadastrado em OtherAccount você recebeu um bonus!')
+            } else if (OtherAccount && value >= 1) {
+                this.balance += 10
+                console.log ('Você depositou com sucesso e recebeu um bonus pelo depósito realizado!')
+            } else {
+                this.balance = this.balance
+                throw new Error('Você inseriu um dado inválido.')
+            }
         }
-    
-        throw new Error('Conta não se aplica ao bonus.')
       }
 }
-
-//arquivo criado por mim kaiki
-//salvando projeto
-//teste
